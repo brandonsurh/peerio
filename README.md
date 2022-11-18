@@ -4,7 +4,6 @@ This project demonstrates a basic Hardhat use case. It comes with a sample contr
 
 Try running some of the following tasks:
 
-<<<<<<< HEAD
 ```shell
 npx hardhat help
 npx hardhat test
@@ -12,7 +11,7 @@ REPORT_GAS=true npx hardhat test
 npx hardhat node
 npx hardhat run scripts/deploy.js
 ```
-=======
+
 In the project directory, you can run:
 
 ### `npm install`
@@ -80,4 +79,3 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
->>>>>>> 0c9cc88b955eacfd38478e1259bbdfd1afb44796
