@@ -35,23 +35,17 @@ contract peerio {
     // amount of money in contract
     uint totalBalance;
 
-    // mapping for how much each address has paid
-    mapping(address => uint) public payments;
-    mapping(address => bool) public voted;
-    mapping(address => bool) public hasSubmittedPaper;
-
     mapping(address => User) public users;
+    mapping(uint256 => Article) public articles;
+    uint256[] public articleList;
 
     // owner of the contract (probably needs to change)
     address payable public owner;
 
-    // put these in paper struct
-    uint public upvotes;
-    uint public downvotes;
-
     // maybe put this in user struct/mapping
     uint public rounds;
 
+    // this is used to set the article ids, incremented each time used
     uint id;
 
     //contract settings
@@ -81,9 +75,6 @@ contract peerio {
         //mapping (uint => Article) public article;
     }
 
-    mapping(uint256 => Article) articles;
-    uint256[] public articleList;
-
     // allows users to send money to contract
     function subscribe() public payable {
         if (users[msg.sender].registered == false)
@@ -100,15 +91,10 @@ contract peerio {
         return false;
     }
 
-
     function registerUser() internal {
         User storage newUser = users[msg.sender];
         newUser.reputationScore = 1/2 * 10;
         newUser.registered = true;
-    }
-
-    function showMePerson() public view returns (uint) {
-        return users[msg.sender].userPayments;
     }
 
     // public function to return total balance
@@ -123,7 +109,7 @@ contract peerio {
         // need to change vote lines
         articles[articleId].upvotes++;
         users[msg.sender].numberOfRounds++;
-        users[msg.sender].voted = true;
+        //users[msg.sender].voted = true;
     }
 
     // this arg takes in the id of the article that is being voted on
@@ -132,25 +118,19 @@ contract peerio {
         require(users[msg.sender].voted == false, "You already voted!");
         articles[articleId].downvotes++;
         users[msg.sender].numberOfRounds++;
-        users[msg.sender].voted = true;
     }
 
     // fill arguments with paper struct vars
     function proposeReview(string memory title) public {
         // fill struct with passed args
-        // push paper to data structure of papers to be reviewed
-        // set mapping hasSubmittedArticle to true
         require(users[msg.sender].hasSubmittedArticle == false, "Your article is awaiting approval!");
         Article storage newArticle = articles[id];
         newArticle.articleId = id;
         newArticle.title = title;
-        //newArticle.upvotes = 0;
-        //newArticle.downvotes = 0;
         newArticle.uploader = msg.sender;
         users[msg.sender].hasSubmittedArticle = true;
         articleList.push(id);
         id++;
-        // push it to the stack of articles in review
     }
 
     // should take in paper struct as args
