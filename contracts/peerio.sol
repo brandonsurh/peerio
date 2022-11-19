@@ -30,10 +30,9 @@
 pragma solidity ^0.8.16;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "github/OpenZeppelin/openzeppelin-contracts/contracts/math/SafeMath.sol";
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/security/ReentrancyGuard.sol";
 
-
-contract Peerio {
+contract Peerio is ReentrancyGuard {
 
     mapping(address => User) public users;
     mapping(uint256 => Article) public articles;
@@ -49,7 +48,7 @@ contract Peerio {
     // used as a serial identifier for all Articles
     uint id;
 
-    uint public minPeerReviews = 10;
+    uint public minPeerReviews = 2;
 
     //contract settings
     constructor() {
@@ -128,7 +127,7 @@ contract Peerio {
     }
 
     // this arg takes in the id of the article that is being voted on
-    function makeUpvote(uint articleId) public {
+    function makeUpvote(uint articleId) external nonReentrant {
         require(isUserSubscribed(msg.sender), "You haven't subscribed!");
         require(users[msg.sender].didUserVote[articleId] != true, "You already voted!");
         articles[articleId].upvoteList[articles[articleId].upvoteIndex++] = msg.sender;
@@ -140,7 +139,7 @@ contract Peerio {
     }
 
     // this arg takes in the id of the article that is being voted on
-    function makeDownvote(uint articleId) public {
+    function makeDownvote(uint articleId) external nonReentrant {
         require(isUserSubscribed(msg.sender), "You haven't subscribed!");
         require(users[msg.sender].didUserVote[articleId] != true, "You already voted!");
         //articles[articleId].downvoteList.push(msg.sender);
@@ -181,6 +180,7 @@ contract Peerio {
             } else {
                 articles[_id].status = ArticleStatus.DEPRECIATED;
             }
+            _handleReputation(_id);
         }
     }
 
@@ -192,7 +192,7 @@ contract Peerio {
     // This function pays out peer reviewers for participating
     //
     // .1 FIL = Maximum amount distributed to peer reviewers
-    function _handleRep(uint articleId) internal {
+    function _handleReputation(uint articleId) internal {
         //uint listLength;
         bool result;
         address tempUser;
@@ -233,7 +233,8 @@ contract Peerio {
     // require that only owner can call this
     // require there is enough money to send
     function sendToPeerReviewer(address payable _peerReviewer) internal {
-        _peerReviewer.transfer(0.1 ether);
+        //_peerReviewer.transfer(users[_peerReviewer].reputationScore / 100 * 0.1 ether);
+        _peerReviewer.transfer(0.5 ether);
     }
 
     // non reentrant
