@@ -24,16 +24,17 @@
 // pay contributor if peer review passed
 // pay voters for voting (use reputation)
 
+// Preston: Remove User balances - replace with direct payments
 
 pragma solidity ^0.8.4;
 
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+//import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 
 contract peerio {
 
     // amount of money in contract
-    uint totalBalance;
+    //uint totalBalance;
 
     mapping(address => User) public users;
     mapping(uint256 => Article) public articles;
@@ -46,6 +47,7 @@ contract peerio {
     uint public rounds;
 
     // this is used to set the article ids, incremented each time used
+    // used as a serial identifier for all Articles 
     uint id;
 
     //contract settings
@@ -53,14 +55,23 @@ contract peerio {
         owner = payable(msg.sender); // setting the contract creator
     }
 
+    /*
+    enum ArticleStatus{
+        AWAITING,
+        APPROVED,
+        DEPRECATED
+    }
+    */ 
+
     // STRUCTS
     struct User {
-        uint userPayments;
+        //uint userPayments;
+        uint membershipExpiration; 
         uint reputationScore;
-        uint numberOfRounds;
-        bool activeMember;
+        uint numberOfRounds;    // Used to help determine reputation score
+        //bool activeMember; // Depreciated Variable - This is replaced by checking if `membershipExpiration` has been reached 
         bool voted;         // !!!!!!people wont vote only once!!!!!!!
-        bool hasSubmittedArticle;
+        bool hasSubmittedArticle;   // Only one Article may be submitted for peer review at a time
         bool registered;
         //mapping (uint => Article) public article;
     }
@@ -77,29 +88,30 @@ contract peerio {
 
     // allows users to send money to contract
     function subscribe() public payable {
-        if (users[msg.sender].registered == false)
+        require(msg.value >= 2 ether, "One month's membership is 2 FIL. You are sending an insufficienct amount.");
+        if (users[msg.sender].registered == false) {
             registerUser();
-        totalBalance += msg.value;
-        users[msg.sender].userPayments += msg.value;
-        users[msg.sender].activeMember = true;
+        }
+        if (users[msg.sender].membershipExpiration <= block.timestamp) {
+            users[msg.sender].membershipExpiration = block.timestamp + 31 days;
+        } else {
+            users[msg.sender].membershipExpiration += 31 days;
+        }
     }
     
-    // returns true if an address has paid
+    // returns true if an address is stillAnActiveMember
     function isUserSubscribed(address _addr) public view returns (bool) {
-        if (users[_addr].activeMember)
+        if (users[_addr].membershipExpiration > block.timestamp) {
             return true;
+        }
         return false;
     }
 
+
     function registerUser() internal {
         User storage newUser = users[msg.sender];
-        newUser.reputationScore = 1/2 * 10;
+        newUser.reputationScore = 5; // 0.5 Rating * 10 Frequency;
         newUser.registered = true;
-    }
-
-    // public function to return total balance
-    function getTotalBalance() view public returns(uint) {
-        return totalBalance;
     }
 
     // this arg takes in the id of the article that is being voted on
@@ -118,11 +130,14 @@ contract peerio {
         require(users[msg.sender].voted == false, "You already voted!");
         articles[articleId].downvotes++;
         users[msg.sender].numberOfRounds++;
+        //users[msg.sender].voted = true;
     }
 
     // fill arguments with paper struct vars
     function proposeReview(string memory title) public {
         // fill struct with passed args
+        // push paper to data structure of papers to be reviewed
+
         require(users[msg.sender].hasSubmittedArticle == false, "Your article is awaiting approval!");
         Article storage newArticle = articles[id];
         newArticle.articleId = id;
@@ -133,15 +148,24 @@ contract peerio {
         id++;
     }
 
-    // should take in paper struct as args
-    function isVotingDone() public view returns (bool) {
+    // should take in Article ID as argument
+    function isVotingDone(uint _id) public view returns (bool) {
         // are there enough votes?
-        // needs to be at least 25 percent of peer reviewers vote
-        // maybe also set results in paper struct
-        // if failed review then discard paper from data structure
-        // set hasSubmittedArticle false for uploader
+        // needs to be at least - 11 peer reviewers -
+        // maybe also set results in Article struct
+        // if failed review set status to DEPRECIATED
+        // reset hasSubmittedArticle to false for uploader
+        if(articles[_id].upvotes + articles[_id].downvotes > 10) {
+            return true;
+        }
+        else
+            return false;
     }
 
+    // add function to increase/decrease the minumum required number of peer reviews before article is approved
+    //function updateMinNumberOfPeerreviews() {}
+
+    // ------------------------------------------------------------------------------------
 
 
 }
