@@ -129,7 +129,7 @@ contract Peerio {
     // this arg takes in the id of the article that is being voted on
     function makeUpvote(uint articleId) public {
         require(isUserSubscribed(msg.sender), "You haven't subscribed!");
-        require(users[msg.sender].didUserVote[articleId] == true, "You already voted!");
+        require(users[msg.sender].didUserVote[articleId] != true, "You already voted!");
         articles[articleId].upvoteList[articles[articleId].upvoteIndex++] = msg.sender;
         users[msg.sender].numberOfRounds++;
         users[msg.sender].whatDidUserVote[articleId] = true;
@@ -140,7 +140,7 @@ contract Peerio {
     // this arg takes in the id of the article that is being voted on
     function makeDownvote(uint articleId) public {
         require(isUserSubscribed(msg.sender), "You haven't subscribed!");
-        require(users[msg.sender].didUserVote[articleId] == true, "You already voted!");
+        require(users[msg.sender].didUserVote[articleId] != true, "You already voted!");
         //articles[articleId].downvoteList.push(msg.sender);
         articles[articleId].downvoteList[articles[articleId].downvoteIndex++] = msg.sender;
         users[msg.sender].numberOfRounds++;
