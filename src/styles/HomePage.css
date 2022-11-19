@@ -1,0 +1,17 @@
+.homePageBody {
+    background-image: url("../assets/hero_image.svg");
+    background-color: white;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: right;
+}
+
+.getStartedBox {
+    border: solid;
+    border-radius: 5px;
+    max-width: 200px;
+}
+
+.trending {
+    border: solid;
+}
