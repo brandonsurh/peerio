@@ -48,7 +48,7 @@ contract Peerio is ReentrancyGuard {
     // used as a serial identifier for all Articles
     uint id;
 
-    uint public minPeerReviews = 2;
+    uint public minPeerReviews = 10;
 
     //contract settings
     constructor() {
@@ -233,8 +233,8 @@ contract Peerio is ReentrancyGuard {
     // require that only owner can call this
     // require there is enough money to send
     function sendToPeerReviewer(address payable _peerReviewer) internal {
-        //_peerReviewer.transfer(users[_peerReviewer].reputationScore / 100 * 0.1 ether);
-        _peerReviewer.transfer(0.5 ether);
+        _peerReviewer.transfer(users[_peerReviewer].reputationScore / 100 * 0.1 ether);
+        //_peerReviewer.transfer(5 ether);
     }
 
     // non reentrant
