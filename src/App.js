@@ -1,4 +1,5 @@
-import ConnectWallet from "./connect_wallet";
+import './App.css';
+import connectWallet from "./connect_wallet";
 
 const MenuBar = () => {
     return (
@@ -6,7 +7,7 @@ const MenuBar = () => {
             <button>home</button>
             <button>explore</button>
             <button>about</button>
-            <button>connect wallet</button>
+            <button onClick={connectWallet}>connect wallet</button>
         </>
     )
 }
