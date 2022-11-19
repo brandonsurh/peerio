@@ -4,6 +4,13 @@
 // - safe math
 // - non reentrancy modifier
 // - boolean value
+// - cant vote more than once
+// - article submitter cannot vote
+// - peer reviewers var
+// - voting on article functionality
+// - fraction of subscribed people is required peer review votes needed
+// - only one paper per person to be peer reviewed
+// 
 
 // Methods for smart contract:
 // subscribe/pay funds to smart contract
@@ -27,8 +34,13 @@ contract peerio {
 
     // mapping for how much each address has paid
     mapping(address => uint) public payments;
+    mapping(address => bool) public voted;
 
+    // owner of the contract (probably needs to change)
     address payable public owner;
+    uint public upvotes;
+    uint public downvotes;
+    uint public rounds;
 
     //contract settings
     constructor() {
@@ -52,4 +64,21 @@ contract peerio {
     function getTotalBalance() view public returns(uint) {
         return totalBalance;
     }
+
+    function makeUpvote() public {
+        require(userSubscribed(msg.sender), "You haven't subscribed!");
+        require(voted[msg.sender] == false, "You already voted!");
+        upvotes++;
+        rounds++;
+        voted[msg.sender] = true;
+    }
+
+    function makeDownvote() public {
+        require(userSubscribed(msg.sender), "You haven't subscribed!");
+        require(voted[msg.sender] == false, "You already voted!");
+        downvotes++;
+        rounds++;
+        voted[msg.sender] = true;
+    }
+
 }
