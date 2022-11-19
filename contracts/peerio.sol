@@ -41,8 +41,6 @@ contract Peerio {
     // owner of the contract (probably needs to change)
     address payable public owner;
 
-    uint totalBalance;
-
     // maybe put this in user struct/mapping
     uint public rounds;
 
@@ -92,13 +90,13 @@ contract Peerio {
         uint articleId;
         address uploader;
         ArticleStatus status;
-        address[] upvoteList;
-        address[] downvoteList;
+        address[10] upvoteList;
+        uint upvoteIndex;
+        address[10] downvoteList;
+        uint downvoteIndex;
     }
 
-    function getTotalBalance() public view returns (uint){
-        return totalBalance;
-    }
+
 
 
     // allows users to send money to contract
@@ -112,7 +110,6 @@ contract Peerio {
         } else {
             users[msg.sender].membershipExpiration += 31 days;
         }
-        totalBalance += msg.value;
     }
     
     // returns true if an address is stillAnActiveMember
@@ -133,7 +130,7 @@ contract Peerio {
     function makeUpvote(uint articleId) public {
         require(isUserSubscribed(msg.sender), "You haven't subscribed!");
         require(users[msg.sender].didUserVote[articleId] == true, "You already voted!");
-        articles[articleId].upvoteList.push(msg.sender);
+        articles[articleId].upvoteList[articles[articleId].upvoteIndex++] = msg.sender;
         users[msg.sender].numberOfRounds++;
         users[msg.sender].whatDidUserVote[articleId] = true;
         users[msg.sender].didUserVote[articleId] = true;
@@ -144,7 +141,8 @@ contract Peerio {
     function makeDownvote(uint articleId) public {
         require(isUserSubscribed(msg.sender), "You haven't subscribed!");
         require(users[msg.sender].didUserVote[articleId] == true, "You already voted!");
-        articles[articleId].downvoteList.push(msg.sender);
+        //articles[articleId].downvoteList.push(msg.sender);
+        articles[articleId].downvoteList[articles[articleId].downvoteIndex++] = msg.sender;
         users[msg.sender].numberOfRounds++;
         users[msg.sender].whatDidUserVote[articleId] = false;
         users[msg.sender].didUserVote[articleId] = true;
@@ -161,8 +159,6 @@ contract Peerio {
         newArticle.uploader = msg.sender;
         newArticle.status = ArticleStatus.AWAITING;
         users[msg.sender].hasSubmittedArticle = true;
-        newArticle.upvoteList = new address[](1);
-        newArticle.downvoteList = new address[](1);
         articleList.push(id);
         id++;
     }
@@ -193,7 +189,7 @@ contract Peerio {
     // This function pays out peer reviewers for participating
     //
     // .1 FIL = Maximum amount distributed to peer reviewers
-    function _handleRep(uint articleId) internal view {
+    function _handleRep(uint articleId) internal {
         //uint listLength;
         bool result;
         address tempUser;
@@ -207,20 +203,27 @@ contract Peerio {
         }
         
         // implement safe math
-        for (uint i = 0; i < articles[articleId].upvoteList.length; i++) {
+        for (uint i = 0; i < articles[articleId].upvoteIndex; i++) {
             if (result) {
                 tempUser = articles[articleId].upvoteList[i];
-                users[tempUser] += 1;
+                users[tempUser].reputationScore += 1;
             }
             else {
-                //users.reputationScore -= 1;
+                tempUser = articles[articleId].upvoteList[i];
+                users[tempUser].reputationScore -= 1;
             }
         }
 
-        for (uint i = 0; i < articles[articleId].downvoteList.length; i++) {
-
+        for (uint i = 0; i < articles[articleId].downvoteIndex; i++) {
+            if (!result) {
+                tempUser = articles[articleId].downvoteList[i];
+                users[tempUser].reputationScore += 1;
+            }
+            else {
+                tempUser = articles[articleId].downvoteList[i];
+                users[tempUser].reputationScore -= 1;
+            }
         }
-
     }
 
     // non reentrant
