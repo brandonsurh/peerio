@@ -30,13 +30,14 @@
 pragma solidity ^0.8.16;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "github/OpenZeppelin/openzeppelin-contracts/contracts/math/SafeMath.sol";
 
 
 contract Peerio {
 
     mapping(address => User) public users;
     mapping(uint256 => Article) public articles;
-    uint256[] public articleList;
+    //uint256[] public articleList;
 
     // owner of the contract (probably needs to change)
     address payable public owner;
@@ -134,6 +135,7 @@ contract Peerio {
         users[msg.sender].numberOfRounds++;
         users[msg.sender].whatDidUserVote[articleId] = true;
         users[msg.sender].didUserVote[articleId] = true;
+        finishVoting(articleId);
         sendToPeerReviewer(payable(msg.sender));
     }
 
@@ -146,6 +148,7 @@ contract Peerio {
         users[msg.sender].numberOfRounds++;
         users[msg.sender].whatDidUserVote[articleId] = false;
         users[msg.sender].didUserVote[articleId] = true;
+        finishVoting(articleId);
         sendToPeerReviewer(payable(msg.sender));
     }
 
@@ -159,7 +162,6 @@ contract Peerio {
         newArticle.uploader = msg.sender;
         newArticle.status = ArticleStatus.AWAITING;
         users[msg.sender].hasSubmittedArticle = true;
-        articleList.push(id);
         id++;
     }
 
@@ -175,6 +177,7 @@ contract Peerio {
             users[articles[_id].uploader].hasSubmittedArticle = false;
             if (articles[_id].upvoteIndex > articles[_id].downvoteIndex) {
                 articles[_id].status = ArticleStatus.APPROVED;
+                sendToUploader(payable(articles[_id].uploader));
             } else {
                 articles[_id].status = ArticleStatus.DEPRECIATED;
             }
