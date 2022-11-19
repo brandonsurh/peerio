@@ -1,12 +1,15 @@
 import React from "react";
 import { TextField } from "@material-ui/core";
+import storeFiles from "../ipfs_interface";
 
 class UploadForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
         description: '',
-        author: ''
+        author: '',
+        file: '',
+        cid: ''
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -23,13 +26,22 @@ class UploadForm extends React.Component {
     });
   }
 
-  handleSubmit(event) {
-    alert(this.state.description + "  " + this.state.author)
-    event.preventDefault();
+  handleFileUpload(event) {
+    console.log("event", event)
+    const file = event.target.files[0]
+    this.state.fileName = event.target.files[0].name
   }
 
-  // TODO: function to upload to ipfs 
-  // TODO: insert pointer to ipsf file and add to ipfs files json with other file data
+  async handleSubmit(event) {
+    event.preventDefault();
+    alert(this.state.description + "  " + this.state.author)
+    const cid = await storeFiles(this.state.file)
+    console.log("cid", cid)
+    this.state.cid = cid
+
+    // retrieve file data json, insert file infor and cid and reupload to ipfs 
+  }
+
 
   render() {
     return (
@@ -46,6 +58,14 @@ class UploadForm extends React.Component {
             value={this.state.author} 
             onChange={this.handleChange} 
         />
+        <label>
+            Upload file:
+            <input 
+                type="file" 
+                value={this.state.fileName}
+                onChange={this.handleFileUpload}
+            />
+        </label>
         <input type="submit" value="Submit" />
       </form>
     );
