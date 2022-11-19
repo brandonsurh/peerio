@@ -1,14 +1,11 @@
 import React from "react";
-import { Box, TextField } from "@material-ui/core";
+import UploadForm from "../components/UploadForm"
 
 const UploadPage = () => {
     return (
         <div>
-            <form>
-                <h1>Upload a file</h1>
-                <TextField fullWidth label="Enter description" />
-                <TextField fullWidth label="Author" />
-            </form>
+            <h1>Upload a file</h1>
+            <UploadForm />        
         </div>
     )
 }
