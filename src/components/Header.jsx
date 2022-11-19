@@ -1,4 +1,7 @@
+import '../styles/Header.css'
+
 var ethers = require('ethers');
+
 
 const ConnectWallet = async () =>  {
     let connection = new Promise(async (resolve, reject) => {
@@ -14,15 +17,16 @@ const ConnectWallet = async () =>  {
     alert("connected to: " + result);
 }
 
-const MenuBar = () => {
+const Header = () => {
     return (
-        <>
+        <div className="header">
+            <h1>peerio</h1> 
             <button>home</button>
             <button>explore</button>
             <button>about</button>
             <button onClick={ConnectWallet}>connect wallet</button>
-        </>
+        </div>
     )
 }
 
-export default MenuBar;
+export default Header;
