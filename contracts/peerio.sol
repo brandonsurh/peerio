@@ -237,7 +237,7 @@ contract Peerio {
     // require that only owner can call this
     // require there is enough money to send
     function sendToUploader(address payable _uploader) internal {
-        _uploader.transfer(2 ether);
+        _uploader.transfer(4 ether);
     }
 
 }
