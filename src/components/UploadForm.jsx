@@ -14,6 +14,7 @@ class UploadForm extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.fileInput = React.createRef();
   }
 
   handleChange(event) {
@@ -26,22 +27,14 @@ class UploadForm extends React.Component {
     });
   }
 
-  handleFileUpload(event) {
-    console.log("event", event)
-    const file = event.target.files[0]
-    this.state.fileName = event.target.files[0].name
-  }
-
   async handleSubmit(event) {
     event.preventDefault();
-    alert(this.state.description + "  " + this.state.author)
-    const cid = await storeFiles(this.state.file)
-    console.log("cid", cid)
-    this.state.cid = cid
-
-    // retrieve file data json, insert file infor and cid and reupload to ipfs 
+    alert(
+        `Uploading file = ${this.fileInput.current.files[0].name}`
+    );
+    const file = this.fileInput.current.files
+    const cid = await storeFiles(file)
   }
-
 
   render() {
     return (
@@ -62,8 +55,7 @@ class UploadForm extends React.Component {
             Upload file:
             <input 
                 type="file" 
-                value={this.state.fileName}
-                onChange={this.handleFileUpload}
+                ref={this.fileInput}
             />
         </label>
         <input type="submit" value="Submit" />
