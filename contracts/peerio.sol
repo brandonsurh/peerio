@@ -163,21 +163,21 @@ contract Peerio {
         id++;
     }
 
+    // this needs to be called for each vote
     // should take in Article ID as argument
-    function isVotingDone(uint _id) public {
+    function finishVoting(uint _id) internal {
         // are there enough votes?
         // needs to be at least - `minPeerReviews` -
         // maybe also set results in Article struct
         // if failed review set status to DEPRECIATED
         // reset hasSubmittedArticle to false for uploader
-        if(articles[_id].upvoteList.length + articles[_id].downvoteList.length >= minPeerReviews) {
-            if (articles[_id].upvoteList.length > articles[_id].downvoteList.length) {
+        if(articles[_id].upvoteIndex + articles[_id].downvoteIndex >= minPeerReviews) {
+            users[articles[_id].uploader].hasSubmittedArticle = false;
+            if (articles[_id].upvoteIndex > articles[_id].downvoteIndex) {
                 articles[_id].status = ArticleStatus.APPROVED;
             } else {
                 articles[_id].status = ArticleStatus.DEPRECIATED;
             }
-        } else {
-            revert();
         }
     }
 
