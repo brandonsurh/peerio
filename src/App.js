@@ -35,8 +35,8 @@ const App = () => {
       <Header connectWallet={connectWallet} wallet={wallet} />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/upload" element={<UploadPage />}></Route>
-        <Route path="/review" element={<ReviewPage />}></Route>
+        <Route path="/uploadpage" element={<UploadPage />}></Route>
+        <Route path="/reviewpage" element={<ReviewPage />}></Route>
         <Route path="/explore" element={<Explore />}></Route>
         <Route path="/reviewing/:articleId" element={<Reviewing />}></Route>
         <Route
