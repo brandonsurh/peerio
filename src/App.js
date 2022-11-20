@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import UploadPage from "./pages/UploadPage";
 import ReviewPage from "./pages/ReviewPage";
 import { useState } from "react";
+import Footer from "./components/Footer";
 
 import Explore from "./pages/Explore";
 import Reviewing from "./pages/Reviewing";
@@ -45,6 +46,7 @@ const App = () => {
         ></Route>
         <Route path="/submitted" element={<Submitted />}></Route>
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 };

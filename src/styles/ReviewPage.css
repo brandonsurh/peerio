@@ -21,6 +21,10 @@
   margin: 0rem 0rem 2rem 0rem;
 }
 
+.ProfileCard {
+  transform: scale(0.9, 0.9);
+}
+
 .ProfileTile {
   box-shadow: 5px 5px #5666f6;
 }

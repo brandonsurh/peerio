@@ -1,0 +1,10 @@
+.Form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.Form .TextField {
+  flex-basis: 60%;
+  margin: 1rem 0rem;
+}
