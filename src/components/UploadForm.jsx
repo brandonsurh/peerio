@@ -1,9 +1,10 @@
 import React from 'react'
 import TextField from '@mui/material/TextField'
 import storeFiles from '../ipfs_interface'
-import { insertRow } from '../tl_interface'
+//import { insertRow } from '../tl_interface'
 
 class UploadForm extends React.Component {
+  //console.log("props", this.props)
   constructor(props) {
     super(props)
       this.state = {
@@ -12,7 +13,6 @@ class UploadForm extends React.Component {
         author: '',
         cid: ''
     }
-
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.fileInput = React.createRef()
@@ -34,7 +34,9 @@ class UploadForm extends React.Component {
     const file = this.fileInput.current.files
     const cid = '1234' //await storeFiles(file)
   
+    //const writeRes = await tblLand.write(`INSERT INTO ${artclTable} (title, description, author, cid) VALUES ('${this.state.title}', '${this.state.description}', '${this.state.author}', '${cid}');`);
     // for storing article information in DB
+    /*
     const insertResult = await insertRow(
       this.state.title,
       this.state.description,
@@ -42,6 +44,7 @@ class UploadForm extends React.Component {
       cid
     )
     console.log("insert result", insertResult)
+    */
   }
 
   render() {
