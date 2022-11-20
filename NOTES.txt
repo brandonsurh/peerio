@@ -1,0 +1,4 @@
+to make sure hardhat is working with metamask for demo:
+1. reset account 
+2. start hardhat node 
+3. start react app 

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import HomePage from './pages/HomePage'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './styles/App.css'
@@ -24,7 +24,9 @@ const App = () => {
     setWallet(result)
   }
 
-  createArticleTable();
+  useEffect(() => {
+    createArticleTable();
+  }, []);
   //insertRow(0, 'test-title', 'test-description', 'test-author', 'test-cid')
 
   return (

@@ -32,7 +32,7 @@ class UploadForm extends React.Component {
     event.preventDefault()
     alert(`Uploading file = ${this.fileInput.current.files[0].name}`)
     const file = this.fileInput.current.files
-    const cid = await storeFiles(file)
+    const cid = '1234' //await storeFiles(file)
   
     // for storing article information in DB
     const insertResult = await insertRow(
