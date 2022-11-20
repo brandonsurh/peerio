@@ -4,6 +4,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './styles/App.css'
 import Header from './components/Header'
 import UploadPage from './pages/UploadPage'
+import Explore from './pages/Explore'
+import Reviewing from './pages/Reviewing'
 var ethers = require('ethers')
 
 const App = () => {
@@ -27,6 +29,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/upload" element={<UploadPage />}></Route>
+        <Route path="/explore" element={<Explore />}></Route>
+        <Route path="/reviewing/:postId" element={<Reviewing />}></Route>
       </Routes>
     </BrowserRouter>
   )
