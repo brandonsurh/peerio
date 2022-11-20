@@ -6,6 +6,8 @@ import Header from './components/Header'
 import UploadPage from './pages/UploadPage'
 import Explore from './pages/Explore'
 import Reviewing from './pages/Reviewing'
+import Submitted from './pages/Submitted'
+import UploadReview from './pages/UploadReview'
 var ethers = require('ethers')
 
 const App = () => {
@@ -30,7 +32,9 @@ const App = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/upload" element={<UploadPage />}></Route>
         <Route path="/explore" element={<Explore />}></Route>
-        <Route path="/reviewing/:postId" element={<Reviewing />}></Route>
+        <Route path="/reviewing/:articleId" element={<Reviewing />}></Route>
+        <Route path="/upload-review/:articleId" element={<UploadReview />}></Route>
+        <Route path="/submitted" element={<Submitted />}></Route>
       </Routes>
     </BrowserRouter>
   )
