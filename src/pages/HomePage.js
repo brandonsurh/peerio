@@ -1,17 +1,17 @@
-import Header from '../components/Header'
-import '../styles/HomePage.css'
-import { Button, Container } from '@mui/material'
-import Slider from '../components/Slider'
+import Header from "../components/Header";
+import "../styles/HomePage.css";
+import { Button, Container } from "@mui/material";
+import Slider from "../components/Slider";
 
 const Trending = () => {
-  return null
+  return null;
   // TODO
-}
+};
 
 const HomePage = () => {
   return (
-    <div>
-      <Container maxWidth="xl" style={{ paddingTop: '8rem' }}>
+    <div className="HomePage">
+      <Container maxWidth="xl" style={{ paddingTop: "8rem" }}>
         <main className="homePageBody">
           <div className="getStartedBox">
             <br />
@@ -63,7 +63,7 @@ const HomePage = () => {
       <br />
       <br />
     </div>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;
