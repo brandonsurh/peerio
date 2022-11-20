@@ -1,5 +1,6 @@
 # peerio
 
+A dApp where users are allowed to submit, access, and review scholarly articles.
 
 To launch a local version of our app you can run:
 
