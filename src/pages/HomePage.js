@@ -1,14 +1,11 @@
 import Header from "../components/Header";
 import "../styles/HomePage.css";
 import { Button, Container } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import Slider from "../components/Slider";
 
-const Trending = () => {
-  return null;
-  // TODO
-};
-
 const HomePage = () => {
+  const navigate = useNavigate();
   return (
     <div className="HomePage">
       <Container maxWidth="xl" style={{ paddingTop: "8rem" }}>
@@ -33,6 +30,7 @@ const HomePage = () => {
                 variant="contained"
                 className="yellow-btn"
                 color="primary"
+                onClick={() => navigate("/explore")}
               >
                 get started
               </Button>

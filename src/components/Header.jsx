@@ -3,29 +3,16 @@ import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { Button } from "@mui/material";
 
-var ethers = require("ethers");
-
-const ConnectWallet = async () => {
-  let connection = new Promise(async (resolve, reject) => {
-    const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
-    await provider.send("eth_requestAccounts", []);
-    const signer = provider.getSigner();
-    resolve(signer.getAddress());
-    console.log("Account: ", await signer.getAddress());
-  });
-
-  let result = await connection;
-
-  alert("connected to: " + result);
-};
-
-const Header = () => {
+const Header = ({ connectWallet, wallet }) => {
   return (
     <div className="header">
       <img src={logo} alt="logo" className="logo" />
       <div className="links">
         <Link className="link" to="/">
           Home
+        </Link>
+        <Link className="link" to="/profile">
+          Profile
         </Link>
         <Link className="link" to="/review">
           Review
@@ -36,9 +23,10 @@ const Header = () => {
         <Link className="link" to="/about">
           About
         </Link>
-        <Button onClick={ConnectWallet} className="yellow-btn ">
-          {}
-          connect wallet
+        <Button onClick={connectWallet} className="yellow-btn ">
+          {wallet
+            ? `${wallet.substring(0, 6)}...${wallet.substring(38)}`
+            : "connect wallet"}
         </Button>
       </div>
     </div>

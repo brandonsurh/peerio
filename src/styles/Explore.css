@@ -1,0 +1,129 @@
+.root {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    overflow: hidden;
+}
+
+.imageList {
+    width: 500;
+    height: 450;
+}
+
+.icon {
+    color: 'rgba(255, 255, 255, 0.001)';
+}
+
+.view-btn {
+    text-transform: capitalize;
+    border-color: #9d9e9b;
+}
+
+.gridList {
+    width: 500;
+    height: 700;
+}
+
+.outer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.home-title {
+    padding-left: 1rem;
+    font-size: 100px;
+    font-weight: bold;
+}
+
+.home-text-intro {
+    padding-top: 2.5rem;
+    padding-left: 5rem;
+    font-size: 1.2rem;
+    color: #4a4644;
+    text-align: justify;
+    line-height: 1.4;
+}
+
+.search-form {
+    /* padding-top: 4rem; */
+    margin: 0 auto;
+    padding-right: 2rem;
+}
+
+.pseudo-search {
+    border-radius: 10px;
+    padding: 4px 15px;
+    background-color: white;
+    font-size: 1rem;
+    border: 1px solid rgb(12, 12, 12);
+}
+
+.pseudo-search input {
+    border: 0;
+    background-color: white;
+    width: 300px;
+}
+
+input:focus {
+    outline: none;
+}
+
+.pseudo-search button,
+i {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.pseudo-search select {
+    border: none;
+}
+
+.search-clear {
+    font-size: 12px;
+    color: #4a4644;
+}
+
+.search-icon {
+    font-size: 1.2rem;
+    padding-left: 8px;
+}
+
+.logo-hero {
+    width: 30rem;
+}
+
+.MuiInputBase-root {
+    color: rgba(0, 0, 0, 0.87);
+    cursor: text;
+    display: inline-flex;
+    position: relative;
+    font-size: 0.5rem;
+    box-sizing: border-box;
+    align-items: center;
+    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    font-weight: 400;
+    line-height: 1.1876em;
+    letter-spacing: 0.00938em;
+    height: 33px;
+}
+
+.MuiSelect-outlined.MuiSelect-outlined {
+    font-size: 0.86rem;
+}
+
+.gallery-container {
+    padding: 4rem 0rem !important;
+}
+
+.create-profile-input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    /* font-size: 12px; */
+}
