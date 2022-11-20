@@ -6,9 +6,9 @@ class UploadForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+        title: '',
         description: '',
         author: '',
-        file: '',
         cid: ''
     }
 
@@ -34,11 +34,26 @@ class UploadForm extends React.Component {
     );
     const file = this.fileInput.current.files
     const cid = await storeFiles(file)
+
+    // for storing article information in DB
+    const articleRecord = {
+      "title": this.state.title,
+      "description": this.state.description,
+      "author": this.state.description,
+      "cid": cid
+    }
+    console.log("article record", articleRecord)
   }
 
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
+        <TextField 
+            name="title"
+            label="enter title"
+            value={this.state.title} 
+            onChange={this.handleChange} 
+        />
         <TextField 
             name="description"
             label="enter description"
