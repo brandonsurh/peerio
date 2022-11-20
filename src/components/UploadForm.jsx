@@ -1,7 +1,7 @@
 import React from 'react'
 import TextField from '@mui/material/TextField'
 import storeFiles from '../ipfs_interface'
-import { insertRow } from '../tl_interface'
+//import { insertRow } from '../tl_interface'
 
 class UploadForm extends React.Component {
   constructor(props) {
@@ -32,9 +32,10 @@ class UploadForm extends React.Component {
     event.preventDefault()
     alert(`Uploading file = ${this.fileInput.current.files[0].name}`)
     const file = this.fileInput.current.files
-    const cid = '1234' //await storeFiles(file)
+    const cid = await storeFiles(file)
   
     // for storing article information in DB
+    /*
     const insertResult = await insertRow(
       this.state.title,
       this.state.description,
@@ -42,6 +43,7 @@ class UploadForm extends React.Component {
       cid
     )
     console.log("insert result", insertResult)
+    */
   }
 
   render() {

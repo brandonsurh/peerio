@@ -16,18 +16,22 @@ export async function createArticleTable() {
       }
     );
     console.log( "Created Table", article_table ); 
-
+    
+    const writeRes = await tableland.write(`INSERT INTO ${article_table} (title, description, author, cid) VALUES ('title-ex', 'description-ex', 'author-ex, 'cid-ex');`);
     // save tableland and article table varaibles to local storage 
-    localStorage.setItem("tableland", tableland);
-    localStorage.setItem("article_table", article_table);
+    //localStorage.setItem("tableland", tableland);
+    //localStorage.setItem("article_table", article_table);
 }
 
+
+/*
 export async function insertRow(id, title, description, author, cid) {
     // grab table info from local storage 
-    const tableland = localStorage.getItem("tableland");
-    const article_table = localStorage.getItem("article_table");
-    console.log("retriieved variables", { tableland, article_table })
+    //const tableland = localStorage.getItem("tableland");
+    //const article_table = localStorage.getItem("article_table");
+    //console.log("retriieved variables", { tableland, article_table })
 
     const writeRes = await tableland.write(`INSERT INTO ${article_table} (title, description, author, cid) VALUES ('${title}', '${description}', '${author}', '${cid}');`);
     return writeRes
 }
+*/
