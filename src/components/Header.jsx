@@ -1,5 +1,5 @@
 import "../styles/Header.css";
-import { Subscribe } from "./SmartContractMethods";
+import { IsUserSubscribed } from "./SmartContractMethods";
 
 var ethers = require("ethers");
 
@@ -27,7 +27,7 @@ const Header = () => {
       <button
         onClick={() => {
           ConnectWallet();
-          console.log(Subscribe());
+          console.log(IsUserSubscribed());
         }}
       >
         connect wallet
