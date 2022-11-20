@@ -1,3 +1,6 @@
-* {
-    padding: 5px;
+.yellow-btn {
+    background: #ffbe24 !important;
+    border-radius: 40px !important;
+    color: #191716 !important;
+    padding: 0.5rem 3rem 0.5rem 3rem !important;
 }
