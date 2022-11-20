@@ -9,7 +9,7 @@ class UploadForm extends React.Component {
         title: '',
         description: '',
         author: '',
-        cid: 
+        cid: ''
     }
 
     this.handleChange = this.handleChange.bind(this)
