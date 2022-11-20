@@ -103,7 +103,7 @@ function PostList({ account, contractData, setSelectedProfile }) {
               profiles.map((post, index) => (
                 <Grid item spacing={1} className="swap-card" key={index}>
                   <Card
-                    onClick={() => navigate(`/reviewing/${index}`)}
+                    onClick={() => navigate('/reviewpage')}
                     style={{ background: '#FFBE24', padding: '3rem' }}
                   >
                     <CardContent>

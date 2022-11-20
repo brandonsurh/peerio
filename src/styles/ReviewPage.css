@@ -1,54 +1,55 @@
 .ReviewPage {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 2.5rem -0.5rem;
-  justify-content: center;
-  background-color: #1b263b;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 2.5rem -0.5rem;
+    justify-content: center;
+    background-color: #1b263b;
 }
 
 .ReviewPageHeader {
-  display: flex;
-  flex-basis: 100%;
-  justify-content: flex-start;
-  margin: 2rem;
-  color: #fdfdf0;
+    display: flex;
+    flex-basis: 100%;
+    justify-content: flex-start;
+    margin: 2rem;
+    color: #fdfdf0;
 }
 
 .MiniProfile {
-  display: flex;
-  flex-basis: 100%;
-  justify-content: flex-start;
-  margin: 0rem 0rem 2rem 0rem;
+    display: flex;
+    flex-basis: 100%;
+    justify-content: center;
+    margin: 0rem 0rem 2rem 0rem;
 }
 
 .ProfileCard {
-  transform: scale(0.9, 0.9);
+    transform: scale(0.9, 0.9);
+    padding-right: 5rem;
 }
 
 .ProfileTile {
-  box-shadow: 5px 5px #5666f6;
+    box-shadow: 5px 5px #5666f6;
 }
 
 .ProfileImageWrapper {
-  height: 30vh;
-  width: 24vh;
-  border-radius: 0.5rem;
-  border: 1px solid black;
-  overflow: hidden;
-  background-color: #ffbe24;
-  display: flex;
+    height: 30vh;
+    width: 24vh;
+    border-radius: 0.5rem;
+    border: 1px solid black;
+    overflow: hidden;
+    background-color: #ffbe24;
+    display: flex;
 }
 
 .ProfileTile {
-  background-color: #ffffff;
-  width: 105%;
-  height: 50%;
-  border: 2px solid black;
-  border-radius: 0.5rem;
-  box-shadow: 10px 5px 5x #5666f6;
-  transform: translate(1rem, -2rem);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: auto;
+    background-color: #ffffff;
+    width: 105%;
+    height: 50%;
+    border: 2px solid black;
+    border-radius: 0.5rem;
+    box-shadow: 10px 5px 5x #5666f6;
+    transform: translate(1rem, -2rem);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: auto;
 }

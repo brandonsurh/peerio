@@ -1,13 +1,13 @@
-import React from "react";
-import UploadForm from "../components/UploadForm"
+import React from 'react'
+import UploadForm from '../components/UploadForm'
 
 const UploadPage = () => {
-    return (
-        <div>
-            <h1>Upload a file</h1>
-            <UploadForm />        
-        </div>
-    )
+  return (
+    <center>
+      <h1>Upload a file </h1>
+      <UploadForm />
+    </center>
+  )
 }
 
-export default UploadPage;
+export default UploadPage
