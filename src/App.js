@@ -27,7 +27,7 @@ const App = () => {
   useEffect(() => {
     createArticleTable();
   }, []);
-  //insertRow(0, 'test-title', 'test-description', 'test-author', 'test-cid')
+  //insertRow('test-title', 'test-description', 'test-author', 'test-cid')
 
   return (
     <BrowserRouter>

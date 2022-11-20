@@ -36,7 +36,6 @@ class UploadForm extends React.Component {
   
     // for storing article information in DB
     const insertResult = await insertRow(
-      0, 
       this.state.title,
       this.state.description,
       this.state.author,

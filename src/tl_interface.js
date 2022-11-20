@@ -10,7 +10,7 @@ export async function createArticleTable() {
     const tableland = await connect({chain: "local-tableland"})  // connecting to local hardhat chain
     await tableland.siwe();
     const article_table = await tableland.create(
-      `id integer primary key, title text, description text, author text, cid text`, // Table schema definition
+      `id integer primary key, title text, description text, author text, cid text`, // Table schema definition, id is auto incrementing 
       {
         prefix: `my_sdk_table` // Optional `prefix` used to define a human-readable string
       }
@@ -28,5 +28,6 @@ export async function insertRow(id, title, description, author, cid) {
     const article_table = localStorage.getItem("article_table");
     console.log("retriieved variables", { tableland, article_table })
 
-    const writeRes = await tableland.write(`INSERT INTO ${article_table} (id, title, description, author, cid) VALUES (${id}, '${title}', '${description}', '${author}', '${cid}');`);
+    const writeRes = await tableland.write(`INSERT INTO ${article_table} (title, description, author, cid) VALUES ('${title}', '${description}', '${author}', '${cid}');`);
+    return writeRes
 }
