@@ -7,6 +7,7 @@
         "@emotion/styled": "^11.10.5",
         "@mui/icons-material": "^5.0.3",
         "@mui/material": "^5.10.14",
+        "@tableland/sdk": "^3.1.5",
         "@testing-library/jest-dom": "^5.16.5",
         "@testing-library/react": "^13.4.0",
         "@testing-library/user-event": "^13.5.0",
@@ -19,13 +20,17 @@
         "react-scripts": "5.0.1",
         "web-vitals": "^2.1.4",
         "web3": "^1.8.1",
-        "web3.storage": "^4.4.0"
+        "web3.storage": "^4.4.0",
+        "buffer": "^6.0.3",
+        "process": "^0.11.10",
+        "stream-browserify": "^3.0.0",
+        "react-app-rewired": "^2.2.1" 
     },
     "scripts": {
-        "start": "react-scripts start",
-        "build": "react-scripts build",
-        "test": "react-scripts test",
-        "eject": "react-scripts eject"
+        "start": "react-app-rewired start",
+        "build": "react-app-rewired build",
+        "test": "react-app-rewired test",
+        "eject": "react-app-rewired eject"
     },
     "eslintConfig": {
         "extends": [
@@ -48,7 +53,9 @@
     "devDependencies": {
         "@babel/core": "^7.20.2",
         "@nomicfoundation/hardhat-toolbox": "^2.0.0",
+        "@tableland/local": "^0.0.2",
         "babel-loader": "^9.1.0",
+        "buffer": "^6.0.3",
         "dotenv": "^16.0.3",
         "hardhat": "^2.12.2",
         "webpack": "^5.75.0",

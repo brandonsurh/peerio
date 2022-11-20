@@ -6,6 +6,7 @@ import Header from './components/Header'
 import UploadPage from './pages/UploadPage'
 import Explore from './pages/Explore'
 import Reviewing from './pages/Reviewing'
+import CreateArticleTable from './tableland_db'
 var ethers = require('ethers')
 
 const App = () => {
@@ -22,6 +23,8 @@ const App = () => {
     let result = await connection
     setWallet(result)
   }
+
+  CreateArticleTable();
 
   return (
     <BrowserRouter>
