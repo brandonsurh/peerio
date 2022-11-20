@@ -14,11 +14,14 @@ const Header = ({ connectWallet, wallet }) => {
         <Link className="link" to="/profile">
           Profile
         </Link>
-        <Link className="link" to="/review">
+        <Link className="link" to="/reviewpage">
           Review
         </Link>
         <Link className="link" to="/explore">
           Explore
+        </Link>
+        <Link className="link" to="/uploadpage">
+          Upload
         </Link>
         <Link className="link" to="/about">
           About
