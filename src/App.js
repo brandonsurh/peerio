@@ -6,7 +6,7 @@ import Header from './components/Header'
 import UploadPage from './pages/UploadPage'
 import Explore from './pages/Explore'
 import Reviewing from './pages/Reviewing'
-import CreateArticleTable from './tableland_db'
+import { createArticleTable, insertRow } from './tl_interface'
 var ethers = require('ethers')
 
 const App = () => {
@@ -24,7 +24,8 @@ const App = () => {
     setWallet(result)
   }
 
-  CreateArticleTable();
+  createArticleTable();
+  //insertRow(0, 'test-title', 'test-description', 'test-author', 'test-cid')
 
   return (
     <BrowserRouter>
