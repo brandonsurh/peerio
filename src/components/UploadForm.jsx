@@ -5,11 +5,11 @@ import storeFiles from '../ipfs_interface'
 class UploadForm extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      description: '',
-      author: '',
-      file: '',
-      cid: '',
+      this.state = {
+        title: '',
+        description: '',
+        author: '',
+        cid: 
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -32,16 +32,31 @@ class UploadForm extends React.Component {
     alert(`Uploading file = ${this.fileInput.current.files[0].name}`)
     const file = this.fileInput.current.files
     const cid = await storeFiles(file)
+  
+    // for storing article information in DB
+    const articleRecord = {
+      "title": this.state.title,
+      "description": this.state.description,
+      "author": this.state.description,
+      "cid": cid
+    }
+    console.log("article record", articleRecord)
   }
 
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <TextField
-          name="description"
-          label="enter description"
-          value={this.state.description}
-          onChange={this.handleChange}
+        <TextField 
+            name="title"
+            label="enter title"
+            value={this.state.title} 
+            onChange={this.handleChange} 
+        />
+        <TextField 
+            name="description"
+            label="enter description"
+            value={this.state.description} 
+            onChange={this.handleChange}   
         />
         <TextField
           name="author"
