@@ -13,6 +13,18 @@ The proccess of peer-reviewing helps to reduce:
 - Unnecessary duplication of efforts
 - A need for others to validate and replicate findings
 
+## How it's Made
+Peerio is made from React, IPFS, web3.storage, Tableland, and runs on the FEVM. Our smart contract is coded in Solidity which handles all of the backend for our peer review process of voting and peer review proposals. When a file is uploaded it is stored through IPFS's interface in a decentralized manner. This was done using Protocol Lab's service web3.storage. We also used Tableland to save information about the article while the actual file is stored on web3.storage.
+
+The process of peer-reviewing reduces:
+- Plagiarism
+- Limited and small review groups
+- Lack of input from other reseachers working on related topic
+- Unnecessary duplication of efforts
+- A need for others to validate and replicate findings
+
+Peerio aims to provide solutions to these problems.
+
 To launch a local version of our app you can run:
 
 ### `npm install`
