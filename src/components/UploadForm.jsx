@@ -3,6 +3,8 @@ import TextField from '@mui/material/TextField'
 import '../styles/Upload.css'
 import storeFiles from '../ipfs_interface'
 import { ProposeReview } from './SmartContractMethods'
+import { ref, set, push } from 'firebase/database'
+import { database } from '../firebase.config';
 
 class UploadForm extends React.Component {
   constructor(props) {
@@ -31,6 +33,8 @@ class UploadForm extends React.Component {
 
   async handleSubmit(event) {
     event.preventDefault()
+
+    // store in ipfs
     alert(`Uploading file = ${this.fileInput.current.files[0].name}`)
     const file = this.fileInput.current.files
     let res = await ProposeReview(this.state.title)
@@ -44,6 +48,10 @@ class UploadForm extends React.Component {
       cid: cid,
     }
     console.log('article record', articleRecord)
+
+    // store in firebase db
+    set(ref(database, 'articles/' + cid), articleRecord)
+
   }
 
   render() {
