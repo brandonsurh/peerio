@@ -39,7 +39,7 @@ class UploadForm extends React.Component {
     const articleRecord = {
       title: this.state.title,
       description: this.state.description,
-      author: this.state.description,
+      author: this.state.author,
       cid: cid,
     }
     console.log('article record', articleRecord)
