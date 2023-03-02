@@ -23,14 +23,9 @@ class UploadForm extends React.Component {
     const target = event.target
     const value = target.value
     const name = target.name
-
     this.setState({
       [name]: value,
     })
-    console.log(
-      '🚀 ~ file: UploadForm.jsx ~ line 30 ~ UploadForm ~ handleChange ~ this',
-      this.state,
-    )
   }
 
   async handleSubmit(event) {
