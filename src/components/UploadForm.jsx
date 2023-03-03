@@ -29,20 +29,12 @@ class UploadForm extends React.Component {
   }
 
   async handleSubmit(event) {
-    event.preventDefault()
-    alert(`Uploading file = ${this.fileInput.current.files[0].name}`)
-    const file = this.fileInput.current.files
-    let res = await ProposeReview(this.state.title)
-    const cid = await storeFiles(file)
-
-    // for storing article information in DB
-    const articleRecord = {
-      title: this.state.title,
-      description: this.state.description,
-      author: this.state.author,
-      cid: cid,
-    }
-    console.log('article record', articleRecord)
+    console.log(
+      '🚀 ~ file: UploadForm.jsx:32 ~ UploadForm ~ handleSubmit ~ event:',
+      event,
+    )
+    // event.preventDefault()
+    // console.log('this.state')
   }
 
   render() {
