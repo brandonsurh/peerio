@@ -3,8 +3,6 @@ import TextField from '@mui/material/TextField'
 import '../styles/Upload.css'
 import storeFiles from '../ipfs_interface'
 import { ProposeReview } from './SmartContractMethods'
-import { ref, set, push } from 'firebase/database'
-import { database } from '../firebase.config';
 
 class UploadForm extends React.Component {
   constructor(props) {
@@ -25,56 +23,62 @@ class UploadForm extends React.Component {
     const target = event.target
     const value = target.value
     const name = target.name
-
     this.setState({
       [name]: value,
     })
   }
 
   async handleSubmit(event) {
-    event.preventDefault()
-
-    // store in ipfs
-    alert(`Uploading file = ${this.fileInput.current.files[0].name}`)
-    const file = this.fileInput.current.files
-    let res = await ProposeReview(this.state.title)
-    const cid = await storeFiles(file)
-
-    // for storing article information in DB
-    const articleRecord = {
-      title: this.state.title,
-      description: this.state.description,
-      author: this.state.description,
-      cid: cid,
-    }
-    console.log('article record', articleRecord)
-
-    // store in firebase db
-    set(ref(database, 'articles/' + cid), articleRecord)
-
+    console.log(
+      '🚀 ~ file: UploadForm.jsx:32 ~ UploadForm ~ handleSubmit ~ event:',
+      event,
+    )
+    // event.preventDefault()
+    // console.log('this.state')
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit} className="Form">
+      <form
+        onSubmit={this.handleSubmit}
+        style={{
+          maxWidth: '500px',
+          padding: '2rem',
+          paddingBottom: '3rem',
+          borderRadius: '13px',
+          textAlign: 'start',
+        }}
+      >
+        <h1>Upload a file</h1>
+        <p>
+          <label htmlFor="w3review">Enter title</label>
+        </p>
         <TextField
-          className="TextField"
+          className="create-profile-input"
           name="title"
-          label="enter title"
+          label=""
           value={this.state.title}
           onChange={this.handleChange}
         />
+
+        <p>
+          <label htmlFor="w3review">Enter description</label>
+        </p>
         <TextField
-          className="TextField"
+          className="create-profile-input"
           name="description"
-          label="enter description"
+          label=""
           value={this.state.description}
           onChange={this.handleChange}
         />
+
+        <p>
+          <label htmlFor="w3review">Enter author</label>
+        </p>
         <TextField
           className="TextField"
           name="author"
-          label="enter author"
+          label=""
           value={this.state.author}
           onChange={this.handleChange}
         />
