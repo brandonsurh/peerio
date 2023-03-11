@@ -14,6 +14,20 @@ async function main() {
     await peerio.deployed();
     console.log("Peerio deployed to:", peerio.address, ", on network: ", hre.network.name);
 
+    // write contract address and abi to front end
+    const fs = require('fs');
+    const contractInfo = {
+        address: peerio.address,
+        abi: peerio.interface.format('json')
+    }
+    fs.writeFile("src/contractInfo.json", JSON.stringify(contractInfo), function(err) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("contract address and abi written to src");
+        }
+    });
+
 }
 
 // We recommend this pattern to be able to use async/await everywhere
