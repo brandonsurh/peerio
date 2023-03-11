@@ -10,7 +10,7 @@
 // - voting on article functionality
 // - fraction of subscribed people is required peer review votes needed
 // - only one paper per person to be peer reviewed
-// - data struct to hold papers to be reviewed (strings?, count?, 
+// - data struct to hold papers to be reviewed (strings?, count?,
 // - have someone push to that struct with paper to be reviewed
 // - struct for paper data (name, id (hashed from string?), votes (total and separate), states (voting, passed, failed))
 
@@ -27,10 +27,11 @@
 // Preston: Remove User balances - replace with direct payments
 
 
-pragma solidity ^0.8.16;
+pragma solidity ^0.8.17;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+
 
 contract Peerio is ReentrancyGuard {
 
@@ -65,7 +66,7 @@ contract Peerio is ReentrancyGuard {
         _;
     }
 
-    enum ArticleStatus{ 
+    enum ArticleStatus{
 		AWAITING,
 		APPROVED,
 		DEPRECIATED
@@ -86,7 +87,7 @@ contract Peerio is ReentrancyGuard {
     }
 
     struct Article {
-        string title; 
+        string title;
         uint articleId;
         address uploader;
         ArticleStatus status;
@@ -111,7 +112,7 @@ contract Peerio is ReentrancyGuard {
             users[msg.sender].membershipExpiration += 31 days;
         }
     }
-    
+
     // returns true if an address is stillAnActiveMember
     function isUserSubscribed(address _addr) public view returns (bool) {
         if (users[_addr].membershipExpiration > block.timestamp) {
@@ -204,7 +205,7 @@ contract Peerio is ReentrancyGuard {
             //listLength = articles[articleId].downvoteList.length;
             result = false;
         }
-        
+
         // implement safe math
         for (uint i = 0; i < articles[articleId].upvoteIndex; i++) {
             if (result) {
