@@ -37,7 +37,8 @@ class UploadForm extends React.Component {
     // store in ipfs
     alert(`Uploading file = ${this.fileInput.current.files[0].name}`)
     const file = this.fileInput.current.files
-    let res = await ProposeReview(this.state.title)
+    let id = await ProposeReview(this.state.title)
+    console.log('id', id)
     const cid = await storeFiles(file)
 
     // for storing article information in DB
@@ -46,11 +47,12 @@ class UploadForm extends React.Component {
       description: this.state.description,
       author: this.state.description,
       cid: cid,
+      articleId: id,
     }
     console.log('article record', articleRecord)
 
     // store in firebase db
-    set(ref(database, 'articles/' + cid), articleRecord)
+    set(ref(database, 'articles/' + id), articleRecord)
 
   }
 
