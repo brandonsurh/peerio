@@ -1,10 +1,9 @@
 import React from 'react'
 import TextField from '@mui/material/TextField'
 import '../styles/Upload.css'
-import storeFiles from '../ipfs_interface'
-import { ProposeReview } from './SmartContractMethods'
-import { ref, set, push } from 'firebase/database'
-import { database } from '../firebase.config';
+import storeFiles from '../lib/ipfs_interface'
+import { ProposeReview } from '../lib/SmartContractMethods'
+import supabase from '../lib/supabase_api'
 
 class UploadForm extends React.Component {
   constructor(props) {
@@ -37,6 +36,8 @@ class UploadForm extends React.Component {
     // store in ipfs
     alert(`Uploading file = ${this.fileInput.current.files[0].name}`)
     const file = this.fileInput.current.files
+
+
     let id = await ProposeReview(this.state.title)
     console.log('id', id)
     const cid = await storeFiles(file)
@@ -51,8 +52,6 @@ class UploadForm extends React.Component {
     }
     console.log('article record', articleRecord)
 
-    // store in firebase db
-    set(ref(database, 'articles/' + id), articleRecord)
 
   }
 

@@ -7,6 +7,9 @@
 const hre = require("hardhat");
 
 async function main() {
+    // display account
+    const [deployer] = await ethers.getSigners();
+    console.log("Deploying contracts with account:", deployer.address);
     // deploy peerio contract
     const Peerio = await hre.ethers.getContractFactory("Peerio");
     const peerio = await Peerio.deploy();
