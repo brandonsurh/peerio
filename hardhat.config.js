@@ -18,7 +18,7 @@ module.exports = {
     networks: {
         Hyperspace: {
             chainId: 3141,
-            url: "https://filecoin-hyperspace.chainstacklabs.com/rpc/v1",
+            url: "",
             accounts: [PRIVATE_KEY],
         },
         FilecoinMainnet: {

@@ -3,7 +3,9 @@ import TextField from '@mui/material/TextField'
 import '../styles/Upload.css'
 import storeFiles from '../lib/ipfs_interface'
 import { ProposeReview } from '../lib/SmartContractMethods'
-import supabase from '../lib/supabase_api'
+import { supabase } from '../lib/supabase_api'
+
+console.log('supabase', supabase)
 
 class UploadForm extends React.Component {
   constructor(props) {
@@ -38,20 +40,28 @@ class UploadForm extends React.Component {
     const file = this.fileInput.current.files
 
 
-    let id = await ProposeReview(this.state.title)
-    console.log('id', id)
+    let articleId = Number(await ProposeReview(this.state.title).value)
+    console.log('article id', articleId)
     const cid = await storeFiles(file)
 
     // for storing article information in DB
     const articleRecord = {
+      id: articleId,
       title: this.state.title,
       description: this.state.description,
       author: this.state.description,
       cid: cid,
-      articleId: id,
     }
     console.log('article record', articleRecord)
 
+    // store in DB
+    const articleTable = supabase.from('articles')
+    articleTable.insert(articleRecord).then((res) => {
+        console.log('Article record inserted', res)
+    })
+    .catch((err) => {
+        console.log('Error inserting article record', err)
+    })
 
   }
 
