@@ -1,10 +1,11 @@
 import "../styles/Header.css";
 import { abi } from "../assets/contractABI";
+import ContractData from "../contractInfo.json";
 
 const ethers = require("ethers");
 
 // The Contract interface
-const contractABIJson = JSON.parse(abi);
+const contractABIJson = ContractData.abi //JSON.parse(abi);
 
 // Connect to the network
 //let provider = ethers.getDefaultProvider();
@@ -13,7 +14,7 @@ const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
 const signer = provider.getSigner();
 
 // The address from the above deployment example
-let contractAddress = "0x01818484aB22F029a8EE691Aa9c6b6EEcBdF4c5A";
+let contractAddress = ContractData.address //"0x01818484aB22F029a8EE691Aa9c6b6EEcBdF4c5A";
 
 // We connect to the Contract using a Provider, so we will only
 // have read-only access to the Contract

@@ -1,5 +1,9 @@
 require("@nomicfoundation/hardhat-toolbox")
 require("dotenv").config()
+require("hardhat-deploy")
+require("hardhat-deploy-ethers")
+//require("./tasks")
+
 
 const PRIVATE_KEY = process.env.FEVM_DEV_PRIVATE_KEY
 /** @type import('hardhat/config').HardhatUserConfig */
@@ -18,7 +22,7 @@ module.exports = {
     networks: {
         Hyperspace: {
             chainId: 3141,
-            url: "",
+            url: "https://api.hyperspace.node.glif.io/rpc/v1",
             accounts: [PRIVATE_KEY],
         },
         FilecoinMainnet: {
