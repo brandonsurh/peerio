@@ -97,7 +97,10 @@ contract Peerio is ReentrancyGuard {
         uint downvoteIndex;
     }
 
-
+    // returns the current id iterator
+    function getCurrentId() public view returns (uint) {
+        return id;
+    }
 
 
     // allows users to send money to contract

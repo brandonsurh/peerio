@@ -40,7 +40,7 @@ class UploadForm extends React.Component {
     const file = this.fileInput.current.files
 
 
-    let articleId = Number(await ProposeReview(this.state.title).value)
+    let articleId = await ProposeReview()
     console.log('article id', articleId)
     const cid = await storeFiles(file)
 
