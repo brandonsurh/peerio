@@ -8,3 +8,44 @@
   flex-basis: 60%;
   margin: 1rem 0rem;
 }
+
+.confirmation {
+  box-sizing: border-box;
+  width: 567px;
+  height: 533px;
+  background: #ffffff;
+  border: 2px solid #000000;
+  border-radius: 10px;
+}
+
+.confirmation-tittle {
+  font-family: 'Coustard';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 67px;
+}
+
+.confirmation-p {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 36px;
+  color: #191716;
+}
+
+.btn-yello {
+  width: 209px !important;
+  height: 61px !important;
+  background: #ffbe24 !important;
+  border-radius: 40px !important;
+}
+
+.dot-yello {
+  font-weight: 500;
+  font-size: 68px;
+  line-height: 68px;
+  color: #ffbe24;
+  margin-left: -4px;
+}
