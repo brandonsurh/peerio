@@ -87,7 +87,6 @@ contract Peerio is ReentrancyGuard {
     }
 
     struct Article {
-        string title;
         uint articleId;
         address uploader;
         ArticleStatus status;
@@ -156,12 +155,11 @@ contract Peerio is ReentrancyGuard {
     }
 
     // fill arguments with paper struct vars
-    function proposeReview(string memory title) public returns (uint articleId){
+    function proposeReview() public returns (uint articleId){
         // fill struct with passed args
         require(users[msg.sender].hasSubmittedArticle == false, "Your article is awaiting approval!");
         Article storage newArticle = articles[id];
         newArticle.articleId = id;
-        newArticle.title = title;
         newArticle.uploader = msg.sender;
         newArticle.status = ArticleStatus.AWAITING;
         users[msg.sender].hasSubmittedArticle = true;
@@ -247,6 +245,11 @@ contract Peerio is ReentrancyGuard {
     // require there is enough money to send
     function sendToUploader(address payable _uploader) internal {
         _uploader.transfer(4 ether);
+    }
+
+    // get article status
+    function getArticleStatus(uint _id) public view returns (ArticleStatus) {
+        return articles[_id].status;
     }
 
 }

@@ -54,11 +54,11 @@ export const Articles = async (_articleId) => {
 };
 
 // Propose Review
-// * Param = Document Name
-export const ProposeReview = async (_ArticleName) => {
+export const ProposeReview = async () => {
   // Get the current value
   console.log("Contract ABI", contractABIJson);
-  let currentValue = await contract.proposeReview(String(_ArticleName));
+  let currentValue = await contract.proposeReview();
+  currentValue = Number(currentValue.value);
   console.log("checking", currentValue);
 
   return currentValue;
