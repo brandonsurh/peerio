@@ -157,7 +157,7 @@ contract Peerio is ReentrancyGuard {
     // fill arguments with paper struct vars
     function proposeReview() public returns (uint articleId){
         // fill struct with passed args
-        require(users[msg.sender].hasSubmittedArticle == false, "Your article is awaiting approval!");
+        //require(users[msg.sender].hasSubmittedArticle == false, "Your article is awaiting approval!");
         Article storage newArticle = articles[id];
         newArticle.articleId = id;
         newArticle.uploader = msg.sender;
