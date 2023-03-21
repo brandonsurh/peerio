@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import '../styles/Upload.css'
-import storeFiles from '../ipfs_interface'
-import { ProposeReview } from '../components/SmartContractMethods'
-import { render } from '@testing-library/react'
-
+import storeFiles from '../lib/ipfs_interface'
+import { ProposeReview } from '../lib/SmartContractMethods'
+import { supabase } from '../lib/supabase_api'
 
 class UploadPage extends React.Component {
   constructor(props) {
@@ -37,11 +36,11 @@ class UploadPage extends React.Component {
     event.preventDefault()
     alert(`Uploading file = ${this.fileInput.current.files[0].name}`)
     const file = this.fileInput.current.files
-    let res = await ProposeReview(this.state.title)
-    if (res) {
-      this.setState({ tx: res?.hash })
-    }
+
+    let articleId = await ProposeReview()
+    console.log('article id', articleId)
     const cid = await storeFiles(file)
+
     // for storing article information in DB
     const articleRecord = {
       title: this.state.title,
@@ -50,6 +49,15 @@ class UploadPage extends React.Component {
       cid: cid,
     }
     console.log('article record', articleRecord)
+
+    // store in DB
+    const articleTable = supabase.from('articles')
+    articleTable.insert(articleRecord).then((res) => {
+        console.log('Article record inserted', res)
+    })
+    .catch((err) => {
+        console.log('Error inserting article record', err)
+    })
   }
 
   render() {

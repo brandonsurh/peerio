@@ -1,10 +1,10 @@
-import '../styles/Header.css'
-import { abi } from '../assets/contractABI'
+import "../styles/Header.css";
+import ContractData from "../contractInfo.json";
 
 const ethers = require('ethers')
 
 // The Contract interface
-const contractABIJson = JSON.parse(abi)
+const contractABIJson = ContractData.abi
 
 // Connect to the network
 //let provider = ethers.getDefaultProvider();
@@ -13,7 +13,7 @@ const provider = new ethers.providers.Web3Provider(window.ethereum, 'any')
 const signer = provider.getSigner()
 
 // The address from the above deployment example
-let contractAddress = '0x01818484aB22F029a8EE691Aa9c6b6EEcBdF4c5A'
+let contractAddress = ContractData.address
 
 // We connect to the Contract using a Provider, so we will only
 // have read-only access to the Contract
@@ -54,12 +54,12 @@ export const Articles = async (_articleId) => {
 }
 
 // Propose Review
-// * Param = Document Name
-export const ProposeReview = async (_ArticleName) => {
+export const ProposeReview = async () => {
   // Get the current value
-  console.log('Contract ABI', contractABIJson)
-  let currentValue = await contract.proposeReview(String(_ArticleName))
-  console.log('checking ProposeReview', currentValue)
+  console.log("Contract ABI", contractABIJson);
+  let currentValue = await contract.proposeReview();
+  currentValue = Number(currentValue.value);
+  console.log("checking", currentValue);
 
   return currentValue
 }

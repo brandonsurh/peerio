@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import { Upvote, Downvote, Subscribe } from '../components/SmartContractMethods'
+import { Upvote, Downvote, Subscribe } from '../lib/SmartContractMethods'
 import { useParams } from 'react-router-dom'
 import {
   Container,

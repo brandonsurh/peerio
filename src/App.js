@@ -11,9 +11,11 @@ import Explore from './pages/Explore'
 import Reviewing from './pages/Reviewing'
 import Submitted from './pages/Submitted'
 import UploadReview from './pages/UploadReview'
-var ethers = require('ethers')
+//var ethers = require('ethers')
 
 const App = () => {
+
+    /*
   const [wallet, setWallet] = useState('')
 
   const connectWallet = async () => {
@@ -27,10 +29,11 @@ const App = () => {
     let result = await connection
     setWallet(result)
   }
+  */
 
   return (
     <BrowserRouter>
-      <Header connectWallet={connectWallet} wallet={wallet} />
+      <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/uploadpage" element={<UploadPage />}></Route>

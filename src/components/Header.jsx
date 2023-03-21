@@ -1,9 +1,9 @@
 import "../styles/Header.css";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
-import { Button } from "@mui/material";
+import ConnectWalletButton from "./ConnectWalletButton";
 
-const Header = ({ connectWallet, wallet }) => {
+const Header = () => {
   return (
     <div className="header">
       <img src={logo} alt="logo" className="logo" />
@@ -26,11 +26,7 @@ const Header = ({ connectWallet, wallet }) => {
         <Link className="link" to="/about">
           About
         </Link>
-        <Button onClick={connectWallet} className="yellow-btn ">
-          {wallet
-            ? `${wallet.substring(0, 6)}...${wallet.substring(38)}`
-            : "connect wallet"}
-        </Button>
+        <ConnectWalletButton />
       </div>
     </div>
   );
