@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { db } from '../firebase.config';
+import { collection, doc, updateDoc, getDocs, addDoc } from 'firebase/firestore';
 import '../styles/PostList.css'
 import {
   Typography,
@@ -15,6 +17,7 @@ import Research from '../assets/Research.png'
 function PostList({ account, contractData, setSelectedProfile }) {
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
+  const [proposals, setProposals] = useState([])
   // const history = useHistory()
   const [profiles, setProfiles] = useState([
     {
@@ -99,6 +102,18 @@ function PostList({ account, contractData, setSelectedProfile }) {
       ) : (
         <div>
           <Grid container spacing={6} style={{ marginLeft: '2.9rem' }}>
+            {/*
+
+            TO FETCH
+            profiles= [cid1, cid2, cid3 ]
+            call ipfs & get data
+            display
+
+            TO PUSH CIDS
+            const cid = "from ipfs"
+            save it to firebase
+
+            */}
             {profiles.length ? (
               profiles.map((post, index) => (
                 <Grid item spacing={1} className="swap-card" key={index}>

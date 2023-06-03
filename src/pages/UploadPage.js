@@ -6,6 +6,7 @@ import storeFiles from '../ipfs_interface'
 import { ProposeReview } from '../components/SmartContractMethods'
 import { render } from '@testing-library/react'
 
+// cids= [cid1,cid2 ]
 
 class UploadPage extends React.Component {
   constructor(props) {
